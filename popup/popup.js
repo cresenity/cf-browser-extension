@@ -19,7 +19,7 @@
         }
 
         chrome.runtime.sendMessage({
-            req: 'set-live-server-config',
+            req: 'set-cf-browser-config',
             data: formData
         });
     }
@@ -37,8 +37,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         chrome.runtime.sendMessage({
-            req: 'get-live-server-config'
+            req: 'get-cf-browser-config'
         }, (data) => {
+            console.log(data);
             liveReloadCheck.checked = data.isEnable || false;
             noProxyCheckBox.checked = !data.proxySetup;
             actualServerAddress.value = data.actualUrl || '';
