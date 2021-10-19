@@ -27,11 +27,11 @@
     chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
         if (typeof msg !== 'object') return;
-        if (msg.req === 'set-cf-server-config') {
+        if (msg.req === 'set-cf-browser-config') {
             storeConfigToLocalStorage(msg.data);
-            sendMsgToAllContainPage('cf-server-config-updated', msg.data);
+            sendMsgToAllContainPage('cf-browser-config-updated', msg.data);
         }
-        else if (msg.req === 'get-cf-server-config') {
+        else if (msg.req === 'get-cf-browser-config') {
             const data = getConfigFromLocalStorage();
             sendResponse(data);
         }

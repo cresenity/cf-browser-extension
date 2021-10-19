@@ -8,6 +8,7 @@
     let isActive = false;
 
     function init(data) {
+        console.log(data,address,protocol,window.location.host);
         if (!data.proxySetup) {
             //Correction
             if (data.liveServerUrl.indexOf('http') !== 0)
@@ -38,7 +39,7 @@
     };
 
     function logMsgForASingleTime() {
-        const key = 'oneTimeLog-cf-server-web-extesion';
+        const key = 'oneTimeLog-cf-browser-web-extesion';
         if (!sessionStorage.getItem(key)) {
             console.log("CF server Activated - CF Server Web Extension");
             sessionStorage.setItem(key, 1);
@@ -49,8 +50,7 @@
 
     chrome.runtime.onMessage.addListener((msg) => {
         if (typeof msg !== 'object') return;
-        if (msg.req === 'cf-server-config-updated') {
-            console.log('cf-server-config-updated',msg);
+        if (msg.req === 'cf-browser-config-updated') {
             isActive = msg.data.isEnable;
             if (isActive && !socket) {
                 init(msg.data);
@@ -59,7 +59,7 @@
     });
 
     chrome.runtime.sendMessage({
-        req: 'get-cf-server-config'
+        req: 'get-cf-browser-config'
     }, (data) => {
         isActive = data.isEnable;
         if (isActive && !socket) {
