@@ -1,0 +1,38 @@
+{
+    "manifest_version": 2,
+    "name": "CF Browser Extension",
+    "version": "1.0.0",
+    "description": "Development tools for cresenity framework",
+    "icons": {
+        "96": "./img/icon.png",
+        "128": "./img/icon.png"
+    },
+    "author": "Hery Kurniawan",
+    "short_name": "CF Browser Extension",
+    "homepage_url": "https://github.com/cresenity/cf-browser-extension",
+    "content_scripts": [
+        {
+            "matches": [
+                "http://*/*",
+                "https://*/*"
+            ],
+            "js": [
+                "reload.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "background.js"
+        ]
+    },
+    "browser_action": {
+        "default_popup": "./popup/popup.html",
+        "default_icon": "./img/icon.png",
+        "default_title": "CF Server"
+    },
+    "permissions": [
+        "http://*/*",
+        "https://*/*"
+    ]
+}
